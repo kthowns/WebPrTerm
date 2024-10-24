@@ -7,6 +7,19 @@ function onPageLoad() {
     console.log(localRepository.getVocabAll());
     displayVocabs();
     displayWords();
+    cssLoad();
+}
+
+function cssLoad() {
+    let cssSrc = localStorage.getItem('cssSrc');
+    if(cssSrc == null){
+        cssSrc = "./css/style_main.css";
+    }
+    let link = document.createElement('link');
+    link.rel = "stylesheet";
+    link.href = cssSrc;
+    link.type = "text/css";
+    document.head.appendChild(link);
 }
 
 function displayVocabs() {

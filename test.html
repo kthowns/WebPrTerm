@@ -4,12 +4,13 @@
     <meta name="generator" content="Aspose.Words for .NET 24.9.0"/>
     <title>MyVoca</title>
     <script src="js/vocaViewModel.js" type="module"></script>
-    <link href="./css/style_main.css" rel="stylesheet"/>
 </head>
 <body>
     <header>
         <h1>MyVoca</h1>Criminal Slangs, Vocabulary skills i'm ill
     </header>
+    <input type="button" id="css1" value="css1"/> <input type="button" id="css2" value="css2"/>
+    <br><br>
 
     <input type="text" placeholder="단어장 이름" id="vocab_title"/>
     <input type="button" value="추가" id="vocab_btn_add" onclick="addVocab()"/>
@@ -35,6 +36,15 @@
     <script>
         window.onload = () => {
             onPageLoad();
+            document.getElementById('css1').addEventListener('click', () => {
+               localStorage.setItem('cssSrc', "./css/style_main.css");
+               location.reload();
+
+            });
+            document.getElementById('css2').addEventListener('click', () => {
+                localStorage.setItem('cssSrc', "./css/style_main_1.css");
+                location.reload();
+            });
         }
     </script>
 </body>
