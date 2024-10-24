@@ -1,4 +1,4 @@
-import { VocabDao, WordDao, FavWordsDao, FavVocabsDao} from "./index.js";
+import { VocabDao, WordDao, FavWordsDao, FavVocabsDao } from "./index.js";
 
 class LocalRepository {
     static instance = null;
@@ -40,7 +40,32 @@ class LocalRepository {
 
     deleteVocab(id){
         LocalRepository.vocabDao.deleteVocab(id);
+    }
 
+    insertWord(word) {
+        let wordList = LocalRepository.wordDao.findAll();
+        if(wordList == null)
+            throw new Error("Loading Words Failed.");
+        if(this.wordValidId === 0){
+            let maxId = 0;
+            wordList.forEach((word) => {
+                if(word.id > maxId)
+                    maxId = word.id;
+            });
+            this.wordValidId = maxId+1;
+        }
+        word.id = this.wordValidId;
+        this.wordValidId += 1;
+
+        LocalRepository.wordDao.insertWord(word);
+    }
+
+    getWordAll() {
+        return LocalRepository.wordDao.findAll();
+    }
+
+    deleteWord(id){
+        LocalRepository.wordDao.deleteWord(id);
     }
 }
 
@@ -57,6 +82,7 @@ export { LocalRepository };
 
     런타임 <-- (Entity 객체) --> Repository <-- (JSON 데이터) --> Local Storage
     - DTO는 굳이 불필요
+    - Repository에서 Validation
         1. Load : JSON 데이터를 파싱해서 객체로 변환
         2. Save : 객체를 JSON 형식으로 변환해서 저장
         
