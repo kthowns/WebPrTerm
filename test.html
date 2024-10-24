@@ -8,28 +8,33 @@
 </head>
 <body>
     <header>
-        <h1>MyVoca</h1>나만의 단어장
+        <h1>MyVoca</h1>Criminal Slangs, Vocabulary skills i'm ill
     </header>
 
     <input type="text" placeholder="단어장 이름" id="vocab_title"/>
-    <input type="button" value="추가" id="btn_add"/>
+    <input type="button" value="추가" id="vocab_btn_add" onclick="addVocab()"/>
     <br><br>
     <textarea placeholder="설명" rows="4" cols="40" id="vocab_description"></textarea>
     <br> <br>
     <input type="text" id="vocab_id"/>
-    <input type="button" value="삭제" id="delete_vocab"/>
-
+    <input type="button" value="삭제" id="vocab_btn_delete" onclick="deleteVocab()"/>
 
     <ul id="vocab_list"></ul>
+
+    <input type="text" placeholder="단어" id="word_expression"/>
+    <input type="button" value="추가" id="word_btn_add" onclick="addWord()"/>
+    <br><br>
+    <textarea placeholder="뜻" rows="1" cols="40" id="word_definition"></textarea>
+    <textarea placeholder="단어장 id" rows="1" cols="15" id="word_vocab_id"></textarea>
+    <br> <br>
+    <input type="text" id="word_id"/>
+    <input type="button" value="삭제" id="word_btn_delete" onclick="deleteWord()"/>
+
+    <ul id="word_list"></ul>
+
     <script>
         window.onload = () => {
             onPageLoad();
-            document.getElementById('btn_add').addEventListener('click', (ev) => {
-                addVocab();
-            });
-            document.getElementById('delete_vocab').addEventListener('click', (ev) => {
-                deleteVocab();
-            });
         }
     </script>
 </body>
