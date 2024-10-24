@@ -3,11 +3,11 @@ import { LocalRepository, Vocab, Word } from "./index.js";
 let localRepository = null;
 
 function onPageLoad() {
+    cssLoad();
     localRepository = new LocalRepository();
     console.log(localRepository.getVocabAll());
     displayVocabs();
     displayWords();
-    cssLoad();
 }
 
 function cssLoad() {
@@ -16,6 +16,9 @@ function cssLoad() {
         cssSrc = "./css/style_main.css";
     }
     let link = document.createElement('link');
+    link.onload = () => { //css가 로드된 후에 페이지 표시
+      document.body.style.visibility = 'visible';
+    };
     link.rel = "stylesheet";
     link.href = cssSrc;
     link.type = "text/css";
@@ -90,6 +93,7 @@ function deleteWord() {
 
 window.addWord = addWord;
 window.addVocab = addVocab;
+window.cssLoad = cssLoad;
 window.deleteVocab = deleteVocab;
 window.deleteWord = deleteWord;
 window.onPageLoad = onPageLoad;
