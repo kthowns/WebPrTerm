@@ -16,9 +16,17 @@ class Vocab {
 
 class Word {
     id = 0;
-    constructor(exp, def){
+    constructor(exp, def, vocab_id){
         this.exp = exp;
         this.def = def;
+        this.vocab_id = vocab_id;
+    }
+
+    static fromJson(obj) {
+        let word = new Word(obj.exp, obj.def);
+        word.id = obj.id;
+        word.vocab_id = obj.vocab_id;
+        return word;
     }
 }
 
