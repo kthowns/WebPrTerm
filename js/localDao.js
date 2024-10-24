@@ -31,14 +31,16 @@ class VocabDao {
 
     deleteVocab(id) {
         let vocabs = this.findAll();
+        let isExists  = false;
         for(let i=0; i<vocabs.length; i++){
             if(vocabs[i].id === id){
-                console.log(vocabs[i]);
                 vocabs.splice(i, 1);
+                isExists = true;
                 break;
             }
         }
-
+        if(!isExists)
+            throw new Error("Vocabulary not exists.");
         localStorage.setItem(VocabDao.vocabsKey, JSON.stringify(vocabs));
     }
 }
@@ -51,6 +53,40 @@ class WordDao {
         if (WordDao.instance != null)
             return WordDao.instance;
         WordDao.instance = this;
+    }
+
+    insertWord(word) {
+        let wordList = this.findAll();
+        if (wordList == null)
+            wordList = [];
+        wordList.push(word);
+
+        localStorage.setItem(WordDao.wordsKey, JSON.stringify(wordList));
+    }
+
+    findAll() {
+        let words = [];
+        let wordsJson = JSON.parse(localStorage.getItem(WordDao.wordsKey))  || [];
+        wordsJson.forEach((word) => {
+            words.push(Word.fromJson(word));
+        });
+
+        return words;
+    }
+
+    deleteWord(id) {
+        let words = this.findAll();
+        let isExists  = false;
+        for(let i=0; i<words.length; i++){
+            if(words[i].id === id){
+                words.splice(i, 1);
+                isExists = true;
+                break;
+            }
+        }
+        if(!isExists)
+            throw new Error("Word not exists.");
+        localStorage.setItem(WordDao.wordsKey, JSON.stringify(words));
     }
 }
 
