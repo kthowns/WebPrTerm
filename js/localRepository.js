@@ -1,4 +1,4 @@
-import { VocabDao, WordDao, FavWordsDao, FavVocabsDao } from "./index.js";
+import { VocabDao, WordDao, FavWordsDao, FavVocabsDao, DataDao } from "./index.js";
 
 class LocalRepository {
     static instance = null;
@@ -11,12 +11,10 @@ class LocalRepository {
         if(LocalRepository.instance != null)
             return LocalRepository.instance;
         LocalRepository.instance = this;
-        LocalRepository.vocabDao = new VocabDao();
-        LocalRepository.wordDao = new WordDao();
     }
 
     insertVocab(vocab){
-        let vocabList = LocalRepository.vocabDao.findAll();
+        let vocabList = VocabDao.findAll();
         if(vocabList == null)
             throw new Error("Loading Vocab Failed.");
 
@@ -31,19 +29,19 @@ class LocalRepository {
         vocab.id = this.vocabValidId;
         this.vocabValidId += 1;
 
-        LocalRepository.vocabDao.insertVocab(vocab);
+        VocabDao.insertVocab(vocab);
     }
 
     getVocabAll(){
-        return LocalRepository.vocabDao.findAll();
+        return VocabDao.findAll();
     }
 
     deleteVocab(id){
-        LocalRepository.vocabDao.deleteVocab(id);
+        VocabDao.deleteVocab(id);
     }
 
     insertWord(word) {
-        let wordList = LocalRepository.wordDao.findAll();
+        let wordList = WordDao.findAll();
         if(wordList == null)
             throw new Error("Loading Words Failed.");
         if(this.wordValidId === 0){
@@ -57,15 +55,19 @@ class LocalRepository {
         word.id = this.wordValidId;
         this.wordValidId += 1;
 
-        LocalRepository.wordDao.insertWord(word);
+        WordDao.insertWord(word);
     }
 
     getWordAll() {
-        return LocalRepository.wordDao.findAll();
+        return WordDao.findAll();
     }
 
     deleteWord(id){
-        LocalRepository.wordDao.deleteWord(id);
+        WordDao.deleteWord(id);
+    }
+
+    resetAllData(){
+        DataDao.resetAll();
     }
 }
 
@@ -89,7 +91,7 @@ export { LocalRepository };
     Local Storage는 DB처럼 Key 이름을 Table 이름 형식으로 맵핑, Table은 아래와 같이 구성, 무결성 보장
     - 무결성 보장이나 primary key auto generation 등의 기능은 Repository에서 구현...
         1. Vocabs(voca_id int, title string)
-        2. Word(word_id Int, def string, mean string, voca_id)
+        2. Word(word_id Int, def string, mean string, word_cnt int, voca_id int)
         3. Favorite_vocas(fav_voca_id, voca_id) 즐겨찾는 단어장
         4. Favorite_words(voca_id) 즐겨찾는 단어
  */

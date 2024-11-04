@@ -2,8 +2,8 @@
     DAOs
 */
 
-import { VocabDao, FavVocabsDao, WordDao, FavWordsDao } from "./localDao.js";
-export { VocabDao, FavVocabsDao, WordDao, FavWordsDao }
+import { VocabDao, FavVocabsDao, WordDao, FavWordsDao, DataDao } from "./localDao.js";
+export { VocabDao, FavVocabsDao, WordDao, FavWordsDao, DataDao }
 
 /*
     Models

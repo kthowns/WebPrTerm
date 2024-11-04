@@ -1,16 +1,9 @@
 import { Vocab, Word } from "./index.js"
 
 class VocabDao {
-    static instance = null;
     static vocabsKey = "vocabs";
 
-    constructor() {
-        if (VocabDao.instance != null)
-            return VocabDao.instance;
-        VocabDao.instance = this;
-    }
-
-    insertVocab(vocab) {
+    static insertVocab(vocab) {
         let vocabsList = this.findAll();
         if (vocabsList == null)
             vocabsList = [];
@@ -19,7 +12,7 @@ class VocabDao {
         localStorage.setItem(VocabDao.vocabsKey, JSON.stringify(vocabsList));
     }
 
-    findAll() {
+    static findAll() {
         let vocabs = [];
         let vocabsJson = JSON.parse(localStorage.getItem(VocabDao.vocabsKey))  || [];
         vocabsJson.forEach((vocab) => {
@@ -29,7 +22,7 @@ class VocabDao {
         return vocabs;
     }
 
-    deleteVocab(id) {
+    static deleteVocab(id) {
         let vocabs = this.findAll();
         let isExists  = false;
         for(let i=0; i<vocabs.length; i++){
@@ -46,16 +39,9 @@ class VocabDao {
 }
 
 class WordDao {
-    static instance = null;
     static wordsKey = "words";
 
-    constructor() {
-        if (WordDao.instance != null)
-            return WordDao.instance;
-        WordDao.instance = this;
-    }
-
-    insertWord(word) {
+    static insertWord(word) {
         let wordList = this.findAll();
         if (wordList == null)
             wordList = [];
@@ -64,7 +50,7 @@ class WordDao {
         localStorage.setItem(WordDao.wordsKey, JSON.stringify(wordList));
     }
 
-    findAll() {
+    static findAll() {
         let words = [];
         let wordsJson = JSON.parse(localStorage.getItem(WordDao.wordsKey))  || [];
         wordsJson.forEach((word) => {
@@ -74,7 +60,7 @@ class WordDao {
         return words;
     }
 
-    deleteWord(id) {
+    static deleteWord(id) {
         let words = this.findAll();
         let isExists  = false;
         for(let i=0; i<words.length; i++){
@@ -91,25 +77,19 @@ class WordDao {
 }
 
 class FavWordsDao {
-    static instance = null;
     static favWordsKey = "fav_words";
-
-    constructor() {
-        if (FavWordsDao.instance != null)
-            return FavWordsDao.instance;
-        FavWordsDao.instance = this;
-    }
 }
 
 class FavVocabsDao {
-    static instance = null;
     static favVocabsKey = "fav_vocabs";
-
-    constructor() {
-        if (FavVocabsDao.instance != null)
-            return FavVocabsDao.instance;
-        FavVocabsDao.instance = this;
+}
+class DataDao{
+    static resetAll(){
+        const keys = Object.keys(localStorage);
+        keys.forEach((key)=>{
+            localStorage.removeItem(key);
+        });
     }
 }
 
-export { WordDao, VocabDao, FavVocabsDao, FavWordsDao };
+export { WordDao, VocabDao, FavVocabsDao, FavWordsDao, DataDao };

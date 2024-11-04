@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Vocab - MyVoca</title>
+    <script src="js/vocabViewModel.js" type="module"></script>
+    <style> body {
+        visibility: hidden;
+    }</style>
+</head>
+<body>
+<header>
+    <h1>MyVoca</h1> 단어장 관리
+</header>
+<span id="inputs">
+<input type="button" value="CSS 1" onclick="changeCSS('css/style_main.css')"/>
+<input type="button" value="CSS 2" onclick="changeCSS('css/style_main_1.css')"/>
+    <input type="button" value="데이터 초기화" onclick="resetAll()">
+    <br><br>
+
+
+<input type="text" placeholder="단어장 이름" id="vocab_title"/>
+<input type="button" value="추가" id="vocab_btn_add" onclick="addVocab()"/>
+<br><br>
+
+<textarea placeholder="설명" rows="4" cols="40" id="vocab_description"></textarea>
+<br> <br>
+</span>
+
+<span id="vocabs">
+<ul id="vocab_list"></ul>
+</span>
+
+<script>
+    window.onload = () => {
+        cssLoad();
+        onPageLoad();
+    }
+</script>
+</body>
+</html>
