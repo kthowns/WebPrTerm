@@ -1,33 +1,16 @@
-class Vocab {
-    id = 0;
-    title = "";
-    desc = "";
-    constructor(title, desc){
+class Memo {
+    constructor(id, title, tag, content, isFav = false, lastModified) {
+        this.id = id;
         this.title = title;
-        this.desc = desc;
+        this.tag = tag;
+        this.content = content;
+        this.isFav = isFav;
+        this.lastModified = lastModified;
     }
 
     static fromJson(obj) {
-        let vocab = new Vocab(obj.title, obj.desc);
-        vocab.id = obj.id;
-        return vocab;
+        return new Memo(obj.id, obj.title, obj.tag, obj.content, obj.isFav, obj.lastModified);
     }
 }
 
-class Word {
-    id = 0;
-    constructor(exp, def, vocab_id){
-        this.exp = exp;
-        this.def = def;
-        this.vocab_id = vocab_id;
-    }
-
-    static fromJson(obj) {
-        let word = new Word(obj.exp, obj.def);
-        word.id = obj.id;
-        word.vocab_id = obj.vocab_id;
-        return word;
-    }
-}
-
-export { Vocab, Word };
+export { Memo };

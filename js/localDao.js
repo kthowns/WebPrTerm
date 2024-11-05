@@ -1,95 +1,55 @@
-import { Vocab, Word } from "./index.js"
+import { Memo } from "./index.js"; // MemoDto를 MemoCompact로 수정
 
-class VocabDao {
-    static vocabsKey = "vocabs";
+class MemoDao {
+    static memosKey = "memos";
 
-    static insertVocab(vocab) {
-        let vocabsList = this.findAll();
-        if (vocabsList == null)
-            vocabsList = [];
-        vocabsList.push(vocab);
+    static insertMemo(memo) {
+        let memosList = this.findAll();
+        if (memosList == null)
+            memosList = [];
+        memosList.push(memo);
 
-        localStorage.setItem(VocabDao.vocabsKey, JSON.stringify(vocabsList));
+        localStorage.setItem(MemoDao.memosKey, JSON.stringify(memosList));
     }
 
     static findAll() {
-        let vocabs = [];
-        let vocabsJson = JSON.parse(localStorage.getItem(VocabDao.vocabsKey))  || [];
-        vocabsJson.forEach((vocab) => {
-            vocabs.push(Vocab.fromJson(vocab));
+        let memos = [];
+        let memosJson = JSON.parse(localStorage.getItem(MemoDao.memosKey)) || [];
+        memosJson.forEach((memo) => {
+            memos.push(Memo.fromJson(memo));
         });
 
-        return vocabs;
+        return memos;
     }
 
-    static deleteVocab(id) {
-        let vocabs = this.findAll();
-        let isExists  = false;
-        for(let i=0; i<vocabs.length; i++){
-            if(vocabs[i].id === id){
-                vocabs.splice(i, 1);
+    static deleteMemo(id) {
+        let memos = this.findAll();
+        let isExists = false;
+        for (let i = 0; i < memos.length; i++) {
+            if (memos[i].id === id) {
+                memos.splice(i, 1);
                 isExists = true;
                 break;
             }
         }
-        if(!isExists)
-            throw new Error("Vocabulary not exists.");
-        localStorage.setItem(VocabDao.vocabsKey, JSON.stringify(vocabs));
+        if (!isExists)
+            throw new Error("Memo not exists.");
+        localStorage.setItem(MemoDao.memosKey, JSON.stringify(memos));
+    }
+
+    static saveAll(list) {
+        // 리스트의 메모를 모두 localStorage에 저장
+        localStorage.setItem(MemoDao.memosKey, JSON.stringify(list));
     }
 }
 
-class WordDao {
-    static wordsKey = "words";
-
-    static insertWord(word) {
-        let wordList = this.findAll();
-        if (wordList == null)
-            wordList = [];
-        wordList.push(word);
-
-        localStorage.setItem(WordDao.wordsKey, JSON.stringify(wordList));
-    }
-
-    static findAll() {
-        let words = [];
-        let wordsJson = JSON.parse(localStorage.getItem(WordDao.wordsKey))  || [];
-        wordsJson.forEach((word) => {
-            words.push(Word.fromJson(word));
-        });
-
-        return words;
-    }
-
-    static deleteWord(id) {
-        let words = this.findAll();
-        let isExists  = false;
-        for(let i=0; i<words.length; i++){
-            if(words[i].id === id){
-                words.splice(i, 1);
-                isExists = true;
-                break;
-            }
-        }
-        if(!isExists)
-            throw new Error("Word not exists.");
-        localStorage.setItem(WordDao.wordsKey, JSON.stringify(words));
-    }
-}
-
-class FavWordsDao {
-    static favWordsKey = "fav_words";
-}
-
-class FavVocabsDao {
-    static favVocabsKey = "fav_vocabs";
-}
-class DataDao{
-    static resetAll(){
+class DataDao {
+    static resetAll() {
         const keys = Object.keys(localStorage);
-        keys.forEach((key)=>{
+        keys.forEach((key) => {
             localStorage.removeItem(key);
         });
     }
 }
 
-export { WordDao, VocabDao, FavVocabsDao, FavWordsDao, DataDao };
+export { MemoDao, DataDao }; // FavMemosDao 제거

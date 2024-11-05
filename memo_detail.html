@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Memo Detail - MyMemo</title>
+    <script src="js/memoDetailViewModel.js" type="module"></script>
+    <style>
+        body { visibility: hidden; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>MyMemo</h1> 메모 상세보기
+</header>
+
+<input type="button" value="뒤로 가기" onclick="location.href='memo.html'"/>
+<br><br>
+
+<div id="memoDetail">
+    <h2 id="memoTitle"></h2>
+    <p id="memoTag"></p>
+    <p id="memoContent"></p>
+    <textarea id="memoTitleEdit" placeholder="제목을 입력하세요..." rows="1" style="display:none;"></textarea>
+    <textarea id="memoTagEdit" placeholder="태그를 입력하세요..." rows="1" style="display:none;"></textarea>
+    <textarea id="memoContentEdit" placeholder="내용을 입력하세요..." rows="4" style="display:none;"></textarea>
+    <input type="button" id="submitEdit" value="저장" style="display:none;" onclick="submitEdit()"/>
+    <input type="button" id="editButton" value="편집" onclick="toggleEdit()"/>
+</div>
+
+<script>
+    window.onload = () => {
+        cssLoad();
+        onPageLoad();
+    }
+</script>
+</body>
+</html>

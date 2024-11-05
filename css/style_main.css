@@ -15,6 +15,12 @@ header {
     font-size: 1.5em;
 }
 
+#item_btn {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin-left: auto; /* 왼쪽 여백 자동으로 설정 */
+}
+
 input[type="text"], textarea {
     width: 100%;
     padding: 10px;
@@ -54,17 +60,51 @@ li {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#vocab_title, #vocab_description, #word_expression, #word_definition, #word_vocab_id {
+#memo_title, #memo_description {
     max-width: 500px;
 }
 
-#inputs, #vocabs, #words {
+#inputs, #memos {
     max-width: 600px;
     margin: auto;
 }
 
-#vocab_btn_add, #vocab_btn_delete, #word_btn_add, #word_btn_delete {
+#memo_btn_add, #memo_btn_delete {
     width: 100px;
+}
+
+/* 모달 스타일 추가 */
+#modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modalContent {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {

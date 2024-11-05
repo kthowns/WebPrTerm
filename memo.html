@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Memo - MyMemo</title>
+    <script src="js/memoViewModel.js" type="module"></script>
+    <style>
+        body {
+            visibility: hidden;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <h1>MyMemo</h1> 메모 관리
+</header>
+
+<span id="inputs">
+    <input type="button" value="데이터 초기화" onclick="resetAll()">
+    <input type="button" value="즐겨찾기 메모 보기" id="toggleFavView" onclick="toggleFavView()"/> <!-- 즐겨찾기 보기 버튼 추가 -->
+
+    <br><br>
+
+    <!-- 메모 추가 버튼 -->
+    <input type="button" value="메모 추가" id="openModal" onclick="openModal()"/>
+</span>
+
+<span id="memos">
+    <ul id="memo_list"></ul>
+</span>
+
+<!-- 모달 HTML -->
+<div id="modal">
+    <div id="modalContent">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>메모 추가</h2>
+        <input type="text" placeholder="메모 제목" id="memo_title"/>
+        <input type="text" placeholder="태그" id="memo_tag"/>
+        <textarea placeholder="내용" rows="4" cols="40" id="memo_content"></textarea>
+        <input type="button" value="추가" id="memo_btn_add" onclick="addMemo()"/>
+    </div>
+</div>
+
+<script>
+    window.onload = () => {
+        cssLoad();
+        onPageLoad();
+    }
+</script>
+</body>
+</html>

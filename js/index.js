@@ -2,8 +2,8 @@
     DAOs
 */
 
-import { VocabDao, FavVocabsDao, WordDao, FavWordsDao, DataDao } from "./localDao.js";
-export { VocabDao, FavVocabsDao, WordDao, FavWordsDao, DataDao }
+import { MemoDao, DataDao } from "./localDao.js"; // FavMemosDao 제거
+export { MemoDao, DataDao }
 
 /*
     Models
@@ -15,5 +15,5 @@ export { LocalRepository }
 /*
     Entities
  */
-import { Vocab, Word } from "./entity.js";
-export { Vocab, Word }
+import { Memo } from "./entity.js"; // MemoDto를 MemoCompact로 수정
+export { Memo }
